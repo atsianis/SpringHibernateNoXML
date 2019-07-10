@@ -1,5 +1,6 @@
 package org.afdemp.cb8.springhibernatenoxml.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -19,7 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="EMPLOYEE")
-public class Employee {
+public class Employee implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +44,25 @@ public class Employee {
 	@NotEmpty
 	@Column(name = "SSN", unique=true, nullable = false)
 	private String ssn;
+
+    public Employee() {
+    }
+
+    public Employee(int id, String name, LocalDate joiningDate, BigDecimal salary, String ssn) {
+        this.id = id;
+        this.name = name;
+        this.joiningDate = joiningDate;
+        this.salary = salary;
+        this.ssn = ssn;
+    }
+
+    public Employee(String name, LocalDate joiningDate, BigDecimal salary, String ssn) {
+        this.name = name;
+        this.joiningDate = joiningDate;
+        this.salary = salary;
+        this.ssn = ssn;
+    }
+        
 
 	public int getId() {
 		return id;
